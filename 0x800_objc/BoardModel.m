@@ -256,6 +256,7 @@
                     data[k+1] = @0;
                     loop = true;
                     _score += [data[k] integerValue];
+                    *moved = YES;
                     lock[k] = @1;
                     lock = [self shrink: lock varMoved: nil];
                     
@@ -274,6 +275,7 @@
         }
     }
     
+   
     return result;
 }
 
