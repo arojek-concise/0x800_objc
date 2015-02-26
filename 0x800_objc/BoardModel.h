@@ -20,7 +20,6 @@
 - (void)clear;
 - (NSInteger)valueFor:(NSInteger)x secondParameter:(NSInteger)y;
 - (void) draw;
-- (NSInteger) getEmptyFieldsNumber;
 - (void) moveUp;
 - (void) moveDown;
 - (void) moveLeft;
