@@ -62,50 +62,24 @@
 }
 
 - (void) draw {
-    NSInteger count = [self getEmptyFieldsNumber];
-
-    // New tile generation logic
-    if (count > 0) {
-        while (YES) {
-            NSInteger index = (long)arc4random_uniform(16*1000)/1000;
-            if (!values[index%4][index/4]) {
-                values[index%4][index/4] = 2;
-                return;
-            }
-        }
-
-    // Original tile generation logic
-//        NSInteger index = (NSInteger)arc4random_uniform((UInt32)count);
-//        NSLog(@"Drew: %ld", index);
-//        for (NSInteger i = 0; i < _cols; ++i) {
-//            for (NSInteger j = 0; j < _rows; ++j) {
-//                if (values[i][j] == 0) {
-//                    if (index-- <= 0) {
-//                        // enter initial value
-//                        values[i][j] = 2;
-//                        return;
-//                    }
-//                }
-//            }
-//        }
-
-    } else if ([self isBoardBlocked]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:_gameOverNotif object:nil];
-    }
-}
-
-- (NSInteger) getEmptyFieldsNumber {
-    NSInteger count = 0;
-    for (NSInteger i = 0; i < _cols; ++i) {
-        for (NSInteger j = 0; j < _rows; ++j) {
-            if (values[i][j] == 0) {
-                count++;
+    // Tile generation logic
+    NSInteger index = (long)arc4random_uniform(16);
+    for (int i = 0; i < 16; ++i) {
+        if (!values[index%4][index/4]) {
+            values[index%4][index/4] = 2;
+            return;
+        } else {
+            if (++index >= 16) {
+                index = 0;
             }
         }
     }
     
-    return count;
+    if ([self isBoardBlocked]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:_gameOverNotif object:nil];
+    }
 }
+
 
 - (bool) isBoardBlocked {
     for (int i = 0; i < _cols - 1; ++i) {
@@ -285,7 +259,7 @@
     for (NSNumber *value in data) {
         if ([value integerValue]) {
             [result addObject:value];
-            if (isEmpty && moved) {
+            if (isEmpty && moved != nil) {
                 *moved = YES;
             }
         } else {

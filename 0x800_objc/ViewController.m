@@ -84,16 +84,18 @@
 
 - (IBAction)swipedDown:(id)sender {
     [self.bm moveDown];
+        NSLog(@"Swiped down");
 }
 
 - (IBAction)swipedLeft:(id)sender {
     [self.bm moveLeft];
+        NSLog(@"Swiped to the left");
 }
 
 - (IBAction)swipedRight:(id)sender {
     [self.bm moveRight];
+        NSLog(@"Swiped to the right");
 }
-
 
 // MARK: board
 - (void)refreshBoard {
