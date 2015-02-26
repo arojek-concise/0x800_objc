@@ -103,9 +103,10 @@
             UIView *tile = [self getTileView:x varY:y];
             UILabel *label = [self getLabelFromView:tile];
             NSInteger value = [self.bm valueFor:x secondParameter:y];
-            label.text = (value == 0 ? @"" : [@(value) stringValue]);
-            tileColor = [UIColor colorWithRed:0 green:0.1 * value blue:0 alpha:1];
+            tileColor = [UIColor colorWithRed:0.1 green:0.1 * sqrt(value) blue:0.1 alpha:1];
             tile.backgroundColor = (value == 0 ? [UIColor whiteColor] : tileColor);
+            label.textColor = (value >= 32) ? [UIColor blackColor] : [UIColor whiteColor];
+            label.text = (value == 0 ? @"" : [@(value) stringValue]);
         }
     }
     _scoreCount.text = [@([self.bm score]) stringValue];
